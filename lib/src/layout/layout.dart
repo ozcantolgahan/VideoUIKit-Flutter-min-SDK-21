@@ -41,6 +41,7 @@ class AgoraVideoViewer extends StatefulWidget {
   /// Render mode for local and remote video
   final RenderModeType renderModeType;
   final EdgeInsets? cWhenHasUsersLocalUserPadding;
+  final Widget Function(Widget child)? cMainLocalVideoWidget;
 
   const AgoraVideoViewer({
     super.key,
@@ -56,6 +57,7 @@ class AgoraVideoViewer extends StatefulWidget {
     this.showNumberOfUsers = false,
     this.renderModeType = RenderModeType.renderModeHidden,
     this.cWhenHasUsersLocalUserPadding,
+    this.cMainLocalVideoWidget,
   });
 
   @override

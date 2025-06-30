@@ -19,6 +19,7 @@ class OneToOneLayout extends StatefulWidget {
   final RenderModeType? renderModeType;
 
   final EdgeInsets? cWhenHasUsersLocalUserPadding;
+  final Widget Function(Widget child)? cMainLocalVideoWidget;
 
   const OneToOneLayout({
     super.key,
@@ -28,6 +29,7 @@ class OneToOneLayout extends StatefulWidget {
     this.enableHostControl,
     this.renderModeType = RenderModeType.renderModeHidden,
     this.cWhenHasUsersLocalUserPadding,
+    this.cMainLocalVideoWidget,
   });
 
   @override
@@ -117,13 +119,15 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
                       const EdgeInsets.only(top: 56.0, right: 4),
                   child: Align(
                     alignment: Alignment.topLeft,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: _getLocalViews()),
-                    ),
+                    child: widget.cMainLocalVideoWidget != null
+                        ? widget.cMainLocalVideoWidget!(_getLocalViews())
+                        : Container(
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: _getLocalViews()),
+                          ),
                   ),
                 ),
               ],
