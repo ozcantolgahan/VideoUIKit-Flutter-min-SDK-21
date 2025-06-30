@@ -99,8 +99,8 @@ class _AgoraVideoViewerState extends State<AgoraVideoViewer> {
             client: widget.client,
             disabledVideoWidget: widget.disabledVideoWidget,
             renderModeType: widget.renderModeType,
-            cWhenHasUsersLocalUserPadding:
-                widget.cWhenHasUsersLocalUserPadding);
+            cWhenHasUsersLocalUserPadding: widget.cWhenHasUsersLocalUserPadding,
+            cMainLocalVideoWidget: widget.cMainLocalVideoWidget);
       default:
         return FloatingLayout(
           client: widget.client,
