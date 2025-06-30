@@ -18,6 +18,8 @@ class OneToOneLayout extends StatefulWidget {
   /// Render mode for local and remote video
   final RenderModeType? renderModeType;
 
+  final EdgeInsets? cWhenHasUsersLocalUserPadding;
+
   const OneToOneLayout({
     super.key,
     required this.client,
@@ -25,6 +27,7 @@ class OneToOneLayout extends StatefulWidget {
     this.showAVState,
     this.enableHostControl,
     this.renderModeType = RenderModeType.renderModeHidden,
+    this.cWhenHasUsersLocalUserPadding,
   });
 
   @override
@@ -110,9 +113,10 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0, right: 4),
+                  padding: widget.cWhenHasUsersLocalUserPadding ??
+                      const EdgeInsets.only(top: 56.0, right: 4),
                   child: Align(
-                    alignment: Alignment.topRight,
+                    alignment: Alignment.topLeft,
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width / 3,

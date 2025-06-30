@@ -40,6 +40,7 @@ class AgoraVideoViewer extends StatefulWidget {
 
   /// Render mode for local and remote video
   final RenderModeType renderModeType;
+  final EdgeInsets? cWhenHasUsersLocalUserPadding;
 
   const AgoraVideoViewer({
     super.key,
@@ -54,6 +55,7 @@ class AgoraVideoViewer extends StatefulWidget {
     this.enableHostControls = false,
     this.showNumberOfUsers = false,
     this.renderModeType = RenderModeType.renderModeHidden,
+    this.cWhenHasUsersLocalUserPadding,
   });
 
   @override
@@ -92,10 +94,11 @@ class _AgoraVideoViewerState extends State<AgoraVideoViewer> {
         );
       case Layout.oneToOne:
         return OneToOneLayout(
-          client: widget.client,
-          disabledVideoWidget: widget.disabledVideoWidget,
-          renderModeType: widget.renderModeType,
-        );
+            client: widget.client,
+            disabledVideoWidget: widget.disabledVideoWidget,
+            renderModeType: widget.renderModeType,
+            cWhenHasUsersLocalUserPadding:
+                widget.cWhenHasUsersLocalUserPadding);
       default:
         return FloatingLayout(
           client: widget.client,
