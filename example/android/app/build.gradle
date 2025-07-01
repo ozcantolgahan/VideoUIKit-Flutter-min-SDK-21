@@ -26,7 +26,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "com.agora.uikit"
+    namespace "io.agora.agora_flutter_uikit"
     compileSdkVersion 33
 
     sourceSets {
