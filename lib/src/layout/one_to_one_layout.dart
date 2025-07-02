@@ -96,7 +96,7 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
                                 color: Colors.black,
                                 child: Center(
                                   child: Text(
-                                    'Remote User',
+                                    '',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -143,7 +143,7 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
                           color: Colors.black,
                           child: Center(
                             child: Text(
-                              'Local User',
+                              '',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
