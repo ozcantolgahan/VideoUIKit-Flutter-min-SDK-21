@@ -45,15 +45,18 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
             controller: VideoViewController(
               rtcEngine: widget.client.sessionController.value.engine!,
               canvas: const VideoCanvas(
-                uid: 0,
-                sourceType: VideoSourceType.videoSourceScreen,
-              ),
+                  uid: 0,
+                  sourceType: VideoSourceType.videoSourceScreen,
+                  mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
             ),
           )
         : AgoraVideoView(
             controller: VideoViewController(
               rtcEngine: widget.client.sessionController.value.engine!,
-              canvas: VideoCanvas(uid: 0, renderMode: widget.renderModeType),
+              canvas: VideoCanvas(
+                  uid: 0,
+                  renderMode: widget.renderModeType,
+                  mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
             ),
           );
   }
