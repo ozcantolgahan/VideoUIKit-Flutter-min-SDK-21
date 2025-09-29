@@ -62,7 +62,10 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
     return AgoraVideoView(
       controller: VideoViewController.remote(
         rtcEngine: widget.client.sessionController.value.engine!,
-        canvas: VideoCanvas(uid: uid, renderMode: widget.renderModeType),
+        canvas: VideoCanvas(
+            uid: uid,
+            renderMode: widget.renderModeType,
+            mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
         connection: RtcConnection(
           channelId:
               widget.client.sessionController.value.connectionData!.channelName,
