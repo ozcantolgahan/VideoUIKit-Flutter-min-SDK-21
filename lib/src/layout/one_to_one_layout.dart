@@ -62,16 +62,20 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
   }
 
   Widget _getRemoteViews(int uid) {
-    return AgoraVideoView(
-      controller: VideoViewController.remote(
-        rtcEngine: widget.client.sessionController.value.engine!,
-        canvas: VideoCanvas(
-            uid: uid,
-            renderMode: widget.renderModeType,
-            mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
-        connection: RtcConnection(
-          channelId:
-              widget.client.sessionController.value.connectionData!.channelName,
+    return Transform(
+      alignment: Alignment.center,
+      transform: Matrix4.identity()..scale(-1.0, 1.0, 1.0),
+      child: AgoraVideoView(
+        controller: VideoViewController.remote(
+          rtcEngine: widget.client.sessionController.value.engine!,
+          canvas: VideoCanvas(
+              uid: uid,
+              renderMode: widget.renderModeType,
+              mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
+          connection: RtcConnection(
+            channelId: widget
+                .client.sessionController.value.connectionData!.channelName,
+          ),
         ),
       ),
     );
