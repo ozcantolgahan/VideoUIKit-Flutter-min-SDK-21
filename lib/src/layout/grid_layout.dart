@@ -47,9 +47,9 @@ class _GridLayoutState extends State<GridLayout> {
                 controller: VideoViewController(
                   rtcEngine: widget.client.sessionController.value.engine!,
                   canvas: VideoCanvas(
-                      uid: 0,
-                      renderMode: widget.renderModeType,
-                      mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
+                    uid: 0,
+                    renderMode: widget.renderModeType,
+                  ),
                 ),
               ),
             );
@@ -68,10 +68,9 @@ class _GridLayoutState extends State<GridLayout> {
                   controller: VideoViewController.remote(
                     rtcEngine: widget.client.sessionController.value.engine!,
                     canvas: VideoCanvas(
-                        uid: user.uid,
-                        renderMode: widget.renderModeType,
-                        mirrorMode:
-                            VideoMirrorModeType.videoMirrorModeDisabled),
+                      uid: user.uid,
+                      renderMode: widget.renderModeType,
+                    ),
                     connection: RtcConnection(
                       channelId: widget.client.sessionController.value
                           .connectionData!.channelName,

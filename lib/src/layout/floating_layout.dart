@@ -68,18 +68,18 @@ class _FloatingLayoutState extends State<FloatingLayout> {
             controller: VideoViewController(
               rtcEngine: widget.client.sessionController.value.engine!,
               canvas: const VideoCanvas(
-                  uid: 0,
-                  sourceType: VideoSourceType.videoSourceScreen,
-                  mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
+                uid: 0,
+                sourceType: VideoSourceType.videoSourceScreen,
+              ),
             ),
           )
         : AgoraVideoView(
             controller: VideoViewController(
               rtcEngine: widget.client.sessionController.value.engine!,
               canvas: VideoCanvas(
-                  uid: 0,
-                  renderMode: widget.renderModeType,
-                  mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
+                uid: 0,
+                renderMode: widget.renderModeType,
+              ),
               useFlutterTexture: widget.useFlutterTexture!,
               useAndroidSurfaceView: widget.useAndroidSurfaceView!,
             ),
@@ -91,9 +91,9 @@ class _FloatingLayoutState extends State<FloatingLayout> {
       controller: VideoViewController.remote(
         rtcEngine: widget.client.sessionController.value.engine!,
         canvas: VideoCanvas(
-            uid: uid,
-            renderMode: widget.renderModeType,
-            mirrorMode: VideoMirrorModeType.videoMirrorModeDisabled),
+          uid: uid,
+          renderMode: widget.renderModeType,
+        ),
         connection: RtcConnection(
             channelId: widget
                 .client.sessionController.value.connectionData!.channelName),
