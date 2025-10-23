@@ -97,10 +97,16 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
               children: [
                 Positioned.fill(
                   child: Container(
-                    child: widget.client.sessionController.value.users
-                            .where((e) => e.uid == 10)
-                            .toList()
-                            .first
+                    child: (widget.client.sessionController.value.users
+                                    .where((e) => e.uid == 0)
+                                    .toList()
+                                    .isNotEmpty
+                                ? widget.client.sessionController.value.users
+                                    .where((e) => e.uid == 0)
+                                    .toList()
+                                    .first
+                                : widget
+                                    .client.sessionController.value.users[0])
                             .videoDisabled
                         ? widget.disabledVideoWidget
                         : Stack(
@@ -118,9 +124,15 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
                                 child: Column(
                                   children: [
                                     _videoView(
-                                      _getRemoteViews(widget.client.users
-                                          .where((e) => e == 10)
-                                          .first),
+                                      _getRemoteViews((widget.client.users
+                                              .where((e) => e == 10)
+                                              .toList()
+                                              .isNotEmpty
+                                          ? widget.client.users
+                                              .where((e) => e == 10)
+                                              .toList()
+                                              .first
+                                          : widget.client.users[0])),
                                     ),
                                   ],
                                 ),
