@@ -97,7 +97,10 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
               children: [
                 Positioned.fill(
                   child: Container(
-                    child: widget.client.sessionController.value.users[0]
+                    child: widget.client.sessionController.value.users
+                            .where((e) => e.uid == 10)
+                            .toList()
+                            .first
                             .videoDisabled
                         ? widget.disabledVideoWidget
                         : Stack(
@@ -115,7 +118,9 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
                                 child: Column(
                                   children: [
                                     _videoView(
-                                      _getRemoteViews(widget.client.users[0]),
+                                      _getRemoteViews(widget.client.users
+                                          .where((e) => e == 10)
+                                          .first),
                                     ),
                                   ],
                                 ),
