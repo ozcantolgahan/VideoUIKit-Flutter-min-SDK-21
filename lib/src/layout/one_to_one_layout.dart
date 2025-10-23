@@ -91,23 +91,69 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
   }
 
   Widget _oneToOneLayout() {
-    return widget.client.users.isNotEmpty
-        ? Expanded(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Container(
-                    child: (widget.client.sessionController.value.users
-                                    .where((e) => e.uid == 0)
-                                    .toList()
-                                    .isNotEmpty
-                                ? widget.client.sessionController.value.users
-                                    .where((e) => e.uid == 0)
-                                    .toList()
-                                    .first
-                                : widget
-                                    .client.sessionController.value.users[0])
-                            .videoDisabled
+    try {
+      return widget.client.users.isNotEmpty
+          ? Expanded(
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Container(
+                      child: widget.client.sessionController.value.users
+                              .where((e) => e.uid == 0)
+                              .toList()
+                              .first
+                              .videoDisabled
+                          ? widget.disabledVideoWidget
+                          : Stack(
+                              children: [
+                                Container(
+                                  color: Colors.black,
+                                  child: Center(
+                                    child: Text(
+                                      '',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                Positioned.fill(
+                                  child: Column(
+                                    children: [
+                                      _videoView(
+                                        _getRemoteViews(widget.client.users
+                                            .where((e) => e == 10)
+                                            .toList()
+                                            .first),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ),
+                  ),
+                  Padding(
+                    padding: widget.cWhenHasUsersLocalUserPadding ??
+                        const EdgeInsets.only(top: 56.0, right: 4),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: widget.cMainLocalVideoWidget != null
+                          ? widget.cMainLocalVideoWidget!(_getLocalViews())
+                          : Container(
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: _getLocalViews()),
+                            ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : Expanded(
+              child: Container(
+                child:
+                    widget.client.sessionController.value.isLocalVideoDisabled
                         ? widget.disabledVideoWidget
                         : Stack(
                             children: [
@@ -120,70 +166,68 @@ class _OneToOneLayoutState extends State<OneToOneLayout> {
                                   ),
                                 ),
                               ),
-                              Positioned.fill(
-                                child: Column(
-                                  children: [
-                                    _videoView(
-                                      _getRemoteViews((widget.client.users
-                                              .where((e) => e == 10)
-                                              .toList()
-                                              .isNotEmpty
-                                          ? widget.client.users
-                                              .where((e) => e == 10)
-                                              .toList()
-                                              .first
-                                          : widget.client.users[0])),
-                                    ),
-                                  ],
-                                ),
+                              Column(
+                                children: [
+                                  _videoView(_getLocalViews()),
+                                ],
                               ),
                             ],
                           ),
+              ),
+            );
+    } catch (e) {
+      return widget.client.users.isNotEmpty
+          ? Expanded(
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Container(child: widget.disabledVideoWidget),
                   ),
-                ),
-                Padding(
-                  padding: widget.cWhenHasUsersLocalUserPadding ??
-                      const EdgeInsets.only(top: 56.0, right: 4),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: widget.cMainLocalVideoWidget != null
-                        ? widget.cMainLocalVideoWidget!(_getLocalViews())
-                        : Container(
-                            height: MediaQuery.of(context).size.height * 0.2,
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: _getLocalViews()),
-                          ),
-                  ),
-                ),
-              ],
-            ),
-          )
-        : Expanded(
-            child: Container(
-              child: widget.client.sessionController.value.isLocalVideoDisabled
-                  ? widget.disabledVideoWidget
-                  : Stack(
-                      children: [
-                        Container(
-                          color: Colors.black,
-                          child: Center(
-                            child: Text(
-                              '',
-                              style: TextStyle(color: Colors.white),
+                  Padding(
+                    padding: widget.cWhenHasUsersLocalUserPadding ??
+                        const EdgeInsets.only(top: 56.0, right: 4),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: widget.cMainLocalVideoWidget != null
+                          ? widget.cMainLocalVideoWidget!(_getLocalViews())
+                          : Container(
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: _getLocalViews()),
                             ),
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            _videoView(_getLocalViews()),
-                          ],
-                        ),
-                      ],
                     ),
-            ),
-          );
+                  ),
+                ],
+              ),
+            )
+          : Expanded(
+              child: Container(
+                child:
+                    widget.client.sessionController.value.isLocalVideoDisabled
+                        ? widget.disabledVideoWidget
+                        : Stack(
+                            children: [
+                              Container(
+                                color: Colors.black,
+                                child: Center(
+                                  child: Text(
+                                    '',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  _videoView(_getLocalViews()),
+                                ],
+                              ),
+                            ],
+                          ),
+              ),
+            );
+    }
   }
 
   @override
